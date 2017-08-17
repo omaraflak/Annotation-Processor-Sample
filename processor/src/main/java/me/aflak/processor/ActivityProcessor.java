@@ -24,7 +24,6 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
-import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
 import me.aflak.annotation.Activity;
@@ -39,7 +38,7 @@ public class ActivityProcessor extends AbstractProcessor{
     private final ClassName classContext = ClassName.get("android.content", "Context");
     private final ClassName classIntent = ClassName.get("android.content", "Intent");
 
-    private final String generatedPackage = "me.aflak.annotations";
+    private static final String generatedPackage = "me.aflak.annotations";
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
@@ -51,6 +50,10 @@ public class ActivityProcessor extends AbstractProcessor{
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+        /**
+         *      1) Getting annotated classes
+         */
+
         for(Element element : roundEnvironment.getElementsAnnotatedWith(Activity.class)){
             if(element.getKind() != ElementKind.CLASS){
                 messager.printMessage(Diagnostic.Kind.ERROR, "@Activity should be on top of classes");
@@ -60,11 +63,15 @@ public class ActivityProcessor extends AbstractProcessor{
                     element.getSimpleName().toString()));
         }
 
-        for(ClassName className : classList){
-            TypeSpec.Builder generatedClass = TypeSpec
-                    .classBuilder("Navigator")
-                    .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+        /**
+         *      2) For each annotated class, generate new static method
+         */
 
+        TypeSpec.Builder generatedClass = TypeSpec
+                .classBuilder("Navigator")
+                .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+
+        for(ClassName className : classList){
             MethodSpec startMethod = MethodSpec
                     .methodBuilder("start"+className.simpleName())
                     .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
@@ -75,12 +82,16 @@ public class ActivityProcessor extends AbstractProcessor{
                     .build();
 
             generatedClass.addMethod(startMethod);
+        }
 
-            try {
-                JavaFile.builder(generatedPackage, generatedClass.build()).build().writeTo(filer);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        /**
+         *      3) Write Navigator class into file
+         */
+
+        try {
+            JavaFile.builder(generatedPackage, generatedClass.build()).build().writeTo(filer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return true;
