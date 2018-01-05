@@ -1,13 +1,13 @@
-# Annotation Sample
+# Annotation Processor Example
 
-Simple example to illustrate the use of android annotation and annotation processor.
+Simple example to illustrate the use of android annotation processor.
 
-This code will create an annotation nammed `@Activity` which is meant to target activities. The processor will generate a `Navigator` class with `static` methods to start the annotated activities.
+This code will create an annotation named `@Activity` which is meant to target activities. The processor will generate a `Navigator` class with `static` methods to start the annotated activities.
 
 # Creation Steps (Android Studio)
 
-#### 1) File > New > New Module... > Java Library  --> Name it "annotation"
-#### 2) File > New > New Module... > Java Library  --> Name it "processor"
+#### 1) File > New > New Module... > Java Library  -> Name it "annotation"
+#### 2) File > New > New Module... > Java Library  -> Name it "processor"
 #### 3) In processor build.gradle :
 
     dependencies {
@@ -61,3 +61,8 @@ This code will create an annotation nammed `@Activity` which is meant to target 
     }
 
 #### 7) Annotate any class and Rebuild your project to generate the code
+
+# Sample
+
+* [Annotation](https://github.com/OmarAflak/Annotation-Processor-Sample/blob/master/annotation/src/main/java/me/aflak/annotation/Activity.java)
+* [Processor](https://github.com/OmarAflak/Annotation-Processor-Sample/blob/master/processor/src/main/java/me/aflak/processor/ActivityProcessor.java)
