@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AnnotationSample.iml" filepath="$PROJECT_DIR$/AnnotationSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Annotation-Processor-Sample.iml" filepath="$PROJECT_DIR$/Annotation-Processor-Sample.iml" />
+      <module fileurl="file://C:\Users\Omar\Documents\JAVA\Annotation-Processor-Sample\AnnotationSample.iml" filepath="C:\Users\Omar\Documents\JAVA\Annotation-Processor-Sample\AnnotationSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/annotation/annotation.iml" filepath="$PROJECT_DIR$/annotation/annotation.iml" />
+      <module fileurl="file://C:\Users\Omar\Documents\JAVA\Annotation-Processor-Sample\annotation\annotation.iml" filepath="C:\Users\Omar\Documents\JAVA\Annotation-Processor-Sample\annotation\annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Omar\Documents\JAVA\Annotation-Processor-Sample\app\app.iml" filepath="C:\Users\Omar\Documents\JAVA\Annotation-Processor-Sample\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/processor/processor.iml" filepath="$PROJECT_DIR$/processor/processor.iml" />
+      <module fileurl="file://C:\Users\Omar\Documents\JAVA\Annotation-Processor-Sample\processor\processor.iml" filepath="C:\Users\Omar\Documents\JAVA\Annotation-Processor-Sample\processor\processor.iml" />
     </modules>
   </component>
 </project>
