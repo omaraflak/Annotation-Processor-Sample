@@ -67,25 +67,31 @@ public class ActivityProcessor extends AbstractProcessor{
          *      2) For each annotated class, generate new static method
          */
 
-        TypeSpec.Builder generatedClass = TypeSpec
-                .classBuilder("Navigator")
-                .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
-
+        List<MethodSpec> methods = new ArrayList<>();
         for(ClassName className : classList){
             MethodSpec startMethod = MethodSpec
                     .methodBuilder("start"+className.simpleName())
                     .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                     .returns(void.class)
                     .addParameter(classContext, "context")
-                    .addStatement("$T intent = new $T(context, $L)", classIntent, classIntent, className+".class")
+                    .addStatement("$T intent = new $T(context, $T.class)", classIntent, classIntent, className)
                     .addStatement("context.startActivity(intent)")
                     .build();
 
-            generatedClass.addMethod(startMethod);
+            methods.add(startMethod);
         }
 
         /**
-         *      3) Write Navigator class into file
+         *      3) Generate a class called Navigator that contains the static methods
+         */
+
+        TypeSpec.Builder generatedClass = TypeSpec
+            .classBuilder("Navigator")
+            .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+            .addMethods(methods);
+
+        /**
+         *      4) Write Navigator class into file
          */
 
         try {
